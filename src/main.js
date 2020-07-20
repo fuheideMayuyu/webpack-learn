@@ -1,4 +1,1 @@
-
-let fun = () =>{
-  console.log('mayuyu');
-}
+import './main.less'

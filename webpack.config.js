@@ -29,17 +29,37 @@ module.exports = {
           'babel-loader.js'
         ]
       },
+      // {
+      //   test: /\.jpg$/, // 设置要转换的模块名的正则
+      //   use: [
+      //     // path.resolve(__dirname, 'loaders', 'babel-loader.js')
+      //     {
+      //       loader: 'file-loader',
+      //       options: {
+      //         filename: 'images/[hash].[ext]', // ext 文件扩展名
+      //       }
+      //     }
+      //   ]
+      // },
       {
         test: /\.jpg$/, // 设置要转换的模块名的正则
         use: [
           // path.resolve(__dirname, 'loaders', 'babel-loader.js')
           {
-            loader: 'file-loader.js',
+            loader: 'url-loader',
             options: {
-              filename: 'images/[hash].[ext]' // ext 文件扩展名
+              filename: '[hash].[ext]', // ext 文件扩展名
+              limit: 64*1024, // 小于这个文件大小则转换为base64
             }
           }
-          
+        ]
+      },
+      {
+        test: /\.less$/, // 设置要转换的模块名的正则
+        use: [
+          "style-loader", // 将css变成style标签插入页面中
+          // "css=loader", // 处理css中的@import url('./bg.png')
+          'less-loader' // 将less编译成css
         ]
       }
     ]
